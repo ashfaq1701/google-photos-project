@@ -8,7 +8,7 @@ $client = new Google_Client();
 $client->setAuthConfigFile('config/photos.json');
 $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php');
 $client->addScope(Google_Service_Drive::DRIVE);
-$client->addScope(Google_Service_Iam::CLOUD_PLATFORM);
+$client->addScope('https://www.googleapis.com/oauth2/v1/userinfo');
 
 if (! isset($_GET['code'])) {
 	$auth_url = $client->createAuthUrl();

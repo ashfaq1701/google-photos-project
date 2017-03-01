@@ -8,7 +8,7 @@
 	$client = new My_Google_Client();
 	$client->setAuthConfig('config/photos.json');
 	$client->addScope(Google_Service_Drive::DRIVE);
-	$client->addScope(Google_Service_Iam::CLOUD_PLATFORM);
+	$client->addScope('https://www.googleapis.com/oauth2/v1/userinfo');
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
 		$client->setAccessToken($_SESSION['access_token']);
