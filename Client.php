@@ -1118,10 +1118,7 @@ class My_Google_Client
   
   public function getUserInfo()
   {
-  	$req = new apiHttpRequest('https://www.googleapis.com/oauth2/v1/userinfo');
-  	// XXX error handling missing, this is just a rough draft
-  	$req = $this->auth->sign($req);
-  	$resp = $this->io->makeRequest($req)->getResponseBody();
+  	$req = file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo');
   	return json_decode($resp, 1);
   }
 }
