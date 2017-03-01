@@ -1119,9 +1119,9 @@ class My_Google_Client
   public function getUserInfo()
   {
   	$client = new Client();
-  	$request = $client->createRequest('GET', 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json');
-  	$request->addHeader('Authorization', 'Bearer '.$this->token['access_token']);
-  	$resp = $client->send($request);
-  	return $resp->getBody();
+  	$res = $client->request('GET', 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json', [
+  		'Authorization'     => 'Bearer '.$this->token['access_token']
+  	]);
+  	return $res->getBody();
   }
 }
