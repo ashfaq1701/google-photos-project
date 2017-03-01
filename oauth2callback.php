@@ -8,7 +8,8 @@ $client = new Google_Client();
 $client->setAuthConfigFile('config/photos.json');
 $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php');
 $client->addScope(Google_Service_Drive::DRIVE);
-$client->addScope('https://www.googleapis.com/oauth2/v1/userinfo');
+$client->addScope('https://www.googleapis.com/auth/plus.me');
+$client->addScope('https://www.googleapis.com/auth/userinfo.profile');
 
 if (! isset($_GET['code'])) {
 	$auth_url = $client->createAuthUrl();

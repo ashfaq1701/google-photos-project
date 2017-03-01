@@ -8,7 +8,8 @@
 	$client = new My_Google_Client();
 	$client->setAuthConfig('config/photos.json');
 	$client->addScope(Google_Service_Drive::DRIVE);
-	$client->addScope('https://www.googleapis.com/oauth2/v1/userinfo');
+	$client->addScope('https://www.googleapis.com/auth/plus.me');
+	$client->addScope('https://www.googleapis.com/auth/userinfo.profile');
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
 		$client->setAccessToken($_SESSION['access_token']);
