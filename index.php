@@ -1,18 +1,18 @@
 <?php
 
 	require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/Client.php';
 	
 	session_start();
 	
-	$client = new Google_Client();
+	$client = new My_Google_Client();
 	$client->setAuthConfig('config/photos.json');
 	$client->addScope(Google_Service_Drive::DRIVE_PHOTOS_READONLY);
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
 		$client->setAccessToken($_SESSION['access_token']);
-		$drive = new Google_Service_Drive($client);
-		$files = $drive->files->listFiles(array())->getFiles();
-		echo json_encode($files);
+		$userInfo = $client->getUserInfo();
+		print_r($userInfo);
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';
