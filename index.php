@@ -11,7 +11,7 @@
 	{
 		$client->setAccessToken($_SESSION['access_token']);
 		$drive = new Google_Service_Drive($client);
-		$files = $drive->files->listFiles(array())->getItems();
+		$files = $drive->files->listFiles(array())->getFiles();
 		echo json_encode($files);
 	}
 	else {
