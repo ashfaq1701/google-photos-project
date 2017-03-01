@@ -1118,7 +1118,7 @@ class My_Google_Client
   
   public function getUserInfo()
   {
-  	$req = file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo');
+  	$resp = file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo');
   	return json_decode($resp, 1);
   }
 }
