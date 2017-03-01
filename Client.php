@@ -1120,6 +1120,6 @@ class My_Google_Client
   {
   	$client = new Client();
   	$res = $client->request('GET', 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&&access_token='.$this->token['access_token']);
-  	return $res->getBody();
+  	return $res->getBody()->->getContents();
   }
 }
