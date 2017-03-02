@@ -11,6 +11,7 @@
 	$client->addScope(Google_Service_Drive::DRIVE);
 	$client->addScope('https://www.googleapis.com/auth/plus.me');
 	$client->addScope('https://www.googleapis.com/auth/userinfo.profile');
+	$client->addScope('https://picasaweb.google.com/data/');
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
 		$client->setAccessToken($_SESSION['access_token']);

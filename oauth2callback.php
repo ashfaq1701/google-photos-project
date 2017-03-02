@@ -10,7 +10,7 @@ $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php
 $client->addScope(Google_Service_Drive::DRIVE);
 $client->addScope('https://www.googleapis.com/auth/plus.me');
 $client->addScope('https://www.googleapis.com/auth/userinfo.profile');
-
+$client->addScope('https://picasaweb.google.com/data/');
 if (! isset($_GET['code'])) {
 	$auth_url = $client->createAuthUrl();
 	header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
