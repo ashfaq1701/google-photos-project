@@ -15,7 +15,7 @@
 	{
 		$client->setAccessToken($_SESSION['access_token']);
 		$userInfo = $client->getUserInfo();
-		$userId = $userInfo['id'];
+		$userId = json_decode($userInfo, true)['id'];
 		$token = $_SESSION['access_token']['access_token'];
 		$albums = get_all_albums($userId, $token);
 		print_r($albums);
