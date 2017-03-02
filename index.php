@@ -2,6 +2,7 @@
 
 	require_once __DIR__ . '/vendor/autoload.php';
 	require_once __DIR__ . '/Client.php';
+	require_once __DIR__ . '/lib/functions.php';
 	
 	session_start();
 	
@@ -14,7 +15,10 @@
 	{
 		$client->setAccessToken($_SESSION['access_token']);
 		$userInfo = $client->getUserInfo();
-		print_r($userInfo);
+		$userId = $userInfo['id'];
+		$token = $_SESSION['access_token']['access_token'];
+		$albums = get_all_albums($userId, $token);
+		print_r($albums);
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';
