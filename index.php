@@ -17,11 +17,9 @@
 		$client->setAccessToken($_SESSION['access_token']);
 		$token = $_SESSION['access_token']['access_token'];
 
-		$plus = new Google_Service_Plus($client);
-		$me = $plus->people->get('me');
-		$userId = $me['id'];
-		$albums = get_all_albums($userId, $token);
-		echo json_encode($albums);
+		$albumPhotos = get_user_account_photos($client, $token);
+		echo json_encode($albumPhotos);
+		
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';
