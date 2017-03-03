@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 
+// get all album list for user
 function get_all_albums($userId, $token)
 {
 	$url = 'https://picasaweb.google.com/data/feed/api/user/'.$userId.'?access_token='.$token;
@@ -27,6 +28,7 @@ function get_all_albums($userId, $token)
 	return $albumElements;
 }
 
+// get photos for a given album id
 function get_album_photos($albumId, $userId, $token)
 {
 	$url = 'https://picasaweb.google.com/data/feed/api/user/'.$userId.'/albumid/'.$albumId.'?access_token='.$token;
@@ -52,6 +54,7 @@ function get_album_photos($albumId, $userId, $token)
 	return $photoElements;
 }
 
+// get photos of current user with all albums
 function get_user_photos($userId, $token)
 {
 	$albums = get_all_albums($userId, $token);
@@ -65,6 +68,7 @@ function get_user_photos($userId, $token)
 	return $albums;
 }
 
+//get all photos for the current user only. No business account will not be supported or polled.
 function get_user_account_photos($client, $token)
 {
 	$plus = new Google_Service_Plus($client);
@@ -73,12 +77,42 @@ function get_user_account_photos($client, $token)
 	return get_user_photos($userId, $token);
 }
 
+//get all business accounts for the current logged in user. This will not work without My Business API, which is only visible when business in address verified. 
 function get_all_accounts($token)
 {
 	$url = 'https://mybusiness.googleapis.com/v3/accounts?access_token='.$token;
 	$client = new Client();
 	$res = $client->request('GET', $url);
-	return $res->getBody()->getClients();
+	$accountsJson = $res->getBody()->getClients();
+	$accountsObj = json_decode($accountsJson, true);
+	$accounts = $accountsObj['accounts'];
+	$accountIds = [];
+	foreach ($accounts as $account)
+	{
+		$accountName = $account['name'];
+		$accountTitle = $account['accountName'];
+		$nameParts = explode('/', $accountName);
+		$accountId = $nameParts[count($nameParts) - 1];
+		$accountObj = [];
+		$accountObj['id'] = $accountId;
+		$accountObj['name'] = $accountTitle;
+		$accountIds[] = $accounObj;
+	}
+	return $accountIds;
+}
+
+//get all photos for all business and personal accounts for the current user
+function get_user_all_account_photos($token)
+{
+	$accounts = get_all_accounts();
+	$accountPhotos = [];
+	foreach ($accounts as $account)
+	{
+		$accountId = $account['id'];
+		$accountName = $account['name'];
+		$accountPhotos[$accountName] = get_user_photos($accountId, $token);
+	}
+	return $accountPhotos;
 }
 
 ?>
