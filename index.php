@@ -21,7 +21,7 @@
 		$me = $plus->people->get('me');
 		$userId = $me['id'];
 		$albums = get_all_albums($userId, $token);
-		echo $albums;
+		echo json_encode($albums);
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';

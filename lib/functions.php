@@ -10,14 +10,21 @@ function get_all_albums($userId, $token)
 	$albumsString = $res->getBody()->getContents();
 	$albumXml = simplexml_load_string($albumsString) or die("Error: Cannot create object");
 	$entries = $albumXml->entry;
+	$albumElements = [];
 	foreach ($entries as $entry)
 	{
 		$idElement = $entry->id;
+		$titleElement = $entry->title;
 		$idLink = (string) $idElement;
 		$idLinkParts = explode('/', $idLink);
-		echo $idLinkParts[count($idLinkParts) - 1];
+		$id = $idLinkParts[count($idLinkParts) - 1];
+		$title = (string) $titleElement;
+		$albumElement = [];
+		$albumElement['id'] = $id;
+		$albumElement['title'] = $title;
+		$albumElements[] = $albumElement;
 	}
-	return '';
+	return $albumElements;
 }
 
 function get_all_accounts($token)
