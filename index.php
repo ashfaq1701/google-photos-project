@@ -7,13 +7,10 @@
 	
 	$client = new Google_Client();
 	$client->setAuthConfig('config/photos.json');
+	$client->addScope(Google_Service_Plus::PLUS_ME);
+	$client->addScope(Google_Service_Plus::USERINFO_EMAIL);
+	$client->addScope(Google_Service_Plus::USERINFO_PROFILE);
 	$client->addScope('https://picasaweb.google.com/data/');
-	$client->addScope(Google_Service_Analytics::ANALYTICS);
-	$client->addScope(Google_Service_Analytics::ANALYTICS_MANAGE_USERS);
-	$client->addScope(Google_Service_Analytics::ANALYTICS_EDIT);
-	$client->addScope(Google_Service_Analytics::ANALYTICS_MANAGE_USERS_READONLY);
-	$client->addScope(Google_Service_Analytics::ANALYTICS_PROVISION);
-	$client->addScope(Google_Service_Analytics::ANALYTICS_READONLY);
 	
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
@@ -21,9 +18,10 @@
 		$token = $_SESSION['access_token']['access_token'];
 		//$albums = get_all_albums($token);
 		//print_r($albums);
-		$analytics = new Google_Service_Analytics($client);
-		$accounts = $analytics->management_accounts->listManagementAccounts();
-		echo json_encode($accounts);
+
+		$plus = new Google_Service_Plus($client);
+		$me = $plus->people->get('me');
+		echo json_encode($me);
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';
