@@ -7,18 +7,21 @@
 	
 	$client = new Google_Client();
 	$client->setAuthConfig('config/photos.json');
-	$client->addScope(Google_Service_Drive::DRIVE);
-	$client->addScope('https://www.googleapis.com/auth/plus.me');
-	$client->addScope('https://www.googleapis.com/auth/userinfo.profile');
 	$client->addScope('https://picasaweb.google.com/data/');
-	$client->addScope('https://www.googleapis.com/auth/plus.business.manage');
+	$client->addScope(ANALYTICS);
+	$client->addScope(ANALYTICS_MANAGE_USERS);
+	$client->addScope(ANALYTICS_EDIT);
+	$client->addScope(ANALYTICS_MANAGE_USERS_READONLY);
+	$client->addScope(ANALYTICS_PROVISION);
+	$client->addScope(ANALYTICS_READONLY);
+	
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
 		$client->setAccessToken($_SESSION['access_token']);
 		$token = $_SESSION['access_token']['access_token'];
 		//$albums = get_all_albums($token);
 		//print_r($albums);
-		$accounts = get_all_accounts($token);
+		$accounts = $analytics->management_accounts->listManagementAccounts();
 		print_r($accounts);
 	}
 	else {

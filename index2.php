@@ -6,9 +6,13 @@ session_start();
 	
 $client = new Google_Client();
 $client->setAuthConfig('config/photos.json');
-$client->addScope(Google_Service_Drive::DRIVE);
-$client->addScope('https://www.googleapis.com/oauth2/v1/userinfo');
-$client->addScope('https://www.googleapis.com/auth/plus.business.manage');
+$client->addScope(ANALYTICS);
+$client->addScope(ANALYTICS_MANAGE_USERS);
+$client->addScope(ANALYTICS_EDIT);
+$client->addScope(ANALYTICS_MANAGE_USERS_READONLY);
+$client->addScope(ANALYTICS_PROVISION);
+$client->addScope(ANALYTICS_READONLY);
+$client->addScope('https://picasaweb.google.com/data/');
 $client->revokeToken();
 
 ?>
