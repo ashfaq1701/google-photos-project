@@ -11,14 +11,15 @@ function get_all_albums($userId, $token)
 	$albumXml = simplexml_load_string($albumsString) or die("Error: Cannot create object");
 	$categories = $albumXml->feed->category->subtitle->entry->category;
 	$str = '';
-	foreach ($categories as $category)
+	print_r($categories);
+	/*foreach ($categories as $category)
 	{
 		$currentEntries = $category->summary->entry;
 		foreach ($currentEntries as $entry)
 		{
 			$str .= $entry->asXML().'<br/><br/>';
 		}
-	}
+	}*/
 	return $str;
 }
 
