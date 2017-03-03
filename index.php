@@ -23,7 +23,7 @@
 		//print_r($albums);
 		$analytics = new Google_Service_Analytics($client);
 		$accounts = $analytics->management_accounts->listManagementAccounts();
-		print_r($accounts);
+		echo json_encode($accounts);
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';
