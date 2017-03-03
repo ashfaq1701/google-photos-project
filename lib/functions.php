@@ -44,9 +44,10 @@ function get_album_photos($albumId, $userId, $token)
 		$idLinkParts = explode('/', $idLink);
 		$id = $idLinkParts[count($idLinkParts) - 1];
 		$url = $contentElement['src'];
+		echo '<br/><br/>'.$url.'<br/><br/>';
 		$photoElement = [];
 		$photoElement['id'] = $id;
-		$photoElement['url'] = $url[0];
+		$photoElement['url'] = $url;
 		$photoElements[] = $photoElement;
 	}
 	return $photoElements;
