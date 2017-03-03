@@ -13,7 +13,7 @@ $client->addScope(ANALYTICS_EDIT);
 $client->addScope(ANALYTICS_MANAGE_USERS_READONLY);
 $client->addScope(ANALYTICS_PROVISION);
 $client->addScope(ANALYTICS_READONLY);
-$client->addScope('https://picasaweb.google.com/data/');
+//$client->addScope('https://picasaweb.google.com/data/');
 if (! isset($_GET['code'])) {
 	$auth_url = $client->createAuthUrl();
 	header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
