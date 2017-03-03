@@ -14,7 +14,7 @@ function get_all_albums($userId, $token)
 	{
 		$idElement = $entry->id;
 		$idLink = $idElement->asXML();
-		$idLinkParts = explode("//", $idLink);
+		$idLinkParts = explode('/', $idLink);
 		echo $idLinkParts[count($idLinkParts) - 1];
 	}
 	return '';
