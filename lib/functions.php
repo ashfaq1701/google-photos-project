@@ -9,9 +9,11 @@ function get_all_albums($userId, $token)
 	$res = $client->request('GET', $url);
 	$albumsString = $res->getBody()->getContents();
 	$albumXml = simplexml_load_string($albumsString) or die("Error: Cannot create object");
-	$categories = $albumXml->feed[0];//->category->subtitle->entry->category;
-	$str = '';
-	echo $categories->asXML();
+	$categories = $albumXml->children();//->category->subtitle->entry->category;
+	foreach ($categories as $category)
+	{
+		echo $category->getName().'<br/>';
+	}
 	/*foreach ($categories as $category)
 	{
 		$currentEntries = $category->summary->entry;
@@ -20,7 +22,7 @@ function get_all_albums($userId, $token)
 			$str .= $entry->asXML().'<br/><br/>';
 		}
 	}*/
-	return $str;
+	return '';
 }
 
 function get_all_accounts($token)
