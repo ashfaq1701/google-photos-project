@@ -16,12 +16,12 @@
 	{
 		$client->setAccessToken($_SESSION['access_token']);
 		$token = $_SESSION['access_token']['access_token'];
-		//$albums = get_all_albums($token);
-		//print_r($albums);
 
 		$plus = new Google_Service_Plus($client);
 		$me = $plus->people->get('me');
-		echo json_encode($me);
+		$userId = $me['id'];
+		$albums = get_all_albums($userId, $token);
+		print_r($albums);
 	}
 	else {
 		$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php';
