@@ -7,7 +7,19 @@ function get_all_albums($userId, $token)
 	$url = 'https://picasaweb.google.com/data/feed/api/user/'.$userId.'?access_token='.$token;
 	$client = new Client();
 	$res = $client->request('GET', $url);
-	return $res->getBody()->getContents();
+	$albumsString = $res->getBody()->getContents();
+	$albumXml = simplexml_load_string($albumsString) or die("Error: Cannot create object");
+	$categories = $albumXml->feed->category->subtitle->entry->category;
+	$str = '';
+	foreach ($categories as $category)
+	{
+		$currentEntries = $category->summary->entry;
+		foreach ($currentEntries as $entry)
+		{
+			$str .= $entry->asXML().'<br/><br/>';
+		}
+	}
+	return $str;
 }
 
 function get_all_accounts($token)
