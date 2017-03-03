@@ -14,7 +14,7 @@ function get_all_albums($userId, $token)
 	{
 		echo $category->getName().'<br/>';
 	}*/
-	echo $categories->asXML();
+	echo $categories[0]->asXML();
 	/*foreach ($categories as $category)
 	{
 		$currentEntries = $category->summary->entry;
