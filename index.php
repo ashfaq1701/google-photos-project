@@ -21,6 +21,7 @@
 		$token = $_SESSION['access_token']['access_token'];
 		//$albums = get_all_albums($token);
 		//print_r($albums);
+		$analytics = new Google_Service_Analytics($client);
 		$accounts = $analytics->management_accounts->listManagementAccounts();
 		print_r($accounts);
 	}
