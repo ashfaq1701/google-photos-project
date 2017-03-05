@@ -10,7 +10,9 @@ function get_all_albums($userId, $token)
 	$res = $client->request('GET', $url);
 	$albumsString = $res->getBody()->getContents();
 	$albumXml = simplexml_load_string($albumsString) or die("Error: Cannot create object");
-	$entries = $albumXml->entry;
+	echo $albumXml->asXML();
+	return '';
+	/*$entries = $albumXml->entry;
 	$albumElements = [];
 	foreach ($entries as $entry)
 	{
@@ -25,7 +27,7 @@ function get_all_albums($userId, $token)
 		$albumElement['title'] = $title;
 		$albumElements[] = $albumElement;
 	}
-	return $albumElements;
+	return $albumElements;*/
 }
 
 // get photos for a given album id
