@@ -20,7 +20,7 @@ function get_all_albums($userId, $token)
 		$alternateLinkElement = null;
 		foreach ($linkElements as $linkElement)
 		{
-			if($linkElement['rel'] = 'alternate')
+			if((string) $linkElement['rel'] = 'alternate')
 			{
 				$alternateLinkElement = $linkElement;
 				break;
