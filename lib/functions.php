@@ -18,7 +18,7 @@ function get_all_albums($userId, $token)
 		$titleElement = $entry->title;
 		$linkElements = $entry->link;
 		$alternateLinkElement = $entry->xpath('//link[@rel="alternate"]');
-		$url = (string) $alternateLinkElement[0]['href'];
+		$url = (string) $alternateLinkElement['href'];
 		$idLink = (string) $idElement;
 		$idLinkParts = explode('/', $idLink);
 		$id = $idLinkParts[count($idLinkParts) - 1];
