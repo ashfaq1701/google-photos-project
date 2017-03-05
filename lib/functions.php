@@ -10,14 +10,23 @@ function get_all_albums($userId, $token)
 	$res = $client->request('GET', $url);
 	$albumsString = $res->getBody()->getContents();
 	$albumXml = simplexml_load_string($albumsString) or die("Error: Cannot create object");
-	echo $albumXml->asXML();
-	return '';
-	/*$entries = $albumXml->entry;
+	$entries = $albumXml->entry;
 	$albumElements = [];
 	foreach ($entries as $entry)
 	{
 		$idElement = $entry->id;
 		$titleElement = $entry->title;
+		$linkElements = $entry->link;
+		$alternateLinkElement = null;
+		foreach ($linkElements as $linkElement)
+		{
+			if($linkElement['rel'] = 'alternate')
+			{
+				$alternateLinkElement = $linkElement;
+				break;
+			}
+		}
+		$url = (string) $alternateLinkElement['href'];
 		$idLink = (string) $idElement;
 		$idLinkParts = explode('/', $idLink);
 		$id = $idLinkParts[count($idLinkParts) - 1];
@@ -25,9 +34,10 @@ function get_all_albums($userId, $token)
 		$albumElement = [];
 		$albumElement['id'] = $id;
 		$albumElement['title'] = $title;
+		$albumElement['url'] = $url;
 		$albumElements[] = $albumElement;
 	}
-	return $albumElements;*/
+	return $albumElements;
 }
 
 // get photos for a given album id
