@@ -22,7 +22,7 @@
 		// the below line will be replaced by bottom one only if account is verified and google my business api is working
 		//albumPhotos = get_user_all_account_photos($token);
 		$albumPhotos = get_user_account_photos($client, $token);
-		echo json_encode($albumPhotos);
+		print_r($albumPhotos);
 		
 	}
 	else {
