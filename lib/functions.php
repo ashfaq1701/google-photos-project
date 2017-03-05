@@ -48,7 +48,7 @@ function get_album_photos($albumId, $userId, $token)
 		$url = (string) $contentElement['src'];
 		$photoElement = [];
 		$photoElement['id'] = $id;
-		$photoElement['url'] = str_replace("\\", '', $url);
+		$photoElement['url'] = stripslashes($url);
 		$photoElements[] = $photoElement;
 	}
 	return $photoElements;
