@@ -107,7 +107,7 @@ function get_all_accounts($token)
 //get all photos for all business and personal accounts for the current user
 function get_user_all_account_photos($token)
 {
-	$accounts = get_all_accounts();
+	$accounts = get_all_accounts($token);
 	$accountPhotos = [];
 	foreach ($accounts as $account)
 	{
