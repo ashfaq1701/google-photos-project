@@ -12,7 +12,7 @@
 	$client->addScope(Google_Service_Plus::USERINFO_PROFILE);
 	$client->addScope('https://picasaweb.google.com/data/');
 	// this will only be working when business is whitelisted and have business account verified.
-	//$client->addScope('https://www.googleapis.com/auth/plus.business.manage');
+	$client->addScope('https://www.googleapis.com/auth/plus.business.manage');
 	
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']) 
 	{
@@ -20,8 +20,8 @@
 		$token = $_SESSION['access_token']['access_token'];
 
 		// the below line will be replaced by bottom one only if account is verified and google my business api is working
-		//albumPhotos = get_user_all_account_photos($token);
-		$albumPhotos = get_user_account_photos($client, $token);
+		$albumPhotos = get_user_all_account_photos($token);
+		//$albumPhotos = get_user_account_photos($client, $token);
 		echo json_encode($albumPhotos, JSON_UNESCAPED_SLASHES);
 		
 	}
