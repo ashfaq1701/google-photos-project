@@ -12,7 +12,7 @@ $client->addScope(Google_Service_Plus::USERINFO_EMAIL);
 $client->addScope(Google_Service_Plus::USERINFO_PROFILE);
 $client->addScope('https://picasaweb.google.com/data/');
 // this will only be working when business is whitelisted and have business account verified.
-//$client->addScope('https://www.googleapis.com/auth/plus.business.manage');
+$client->addScope('https://www.googleapis.com/auth/plus.business.manage');
 
 if (! isset($_GET['code'])) {
 	$auth_url = $client->createAuthUrl();
